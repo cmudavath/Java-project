@@ -4,16 +4,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                script {
-                    def gitUrl = 'https://github.com/cmudavath/Java-project.git'
-                    checkout([$class: 'GitSCM', 
-                              branches: [[name: '*/master']], 
-                              userRemoteConfigs: [[url: gitUrl]],
-                              extensions: [[$class: 'CleanBeforeCheckout']],
-                              doGenerateSubmoduleConfigurations: false,
-                              submoduleCfg: [],
-                              browser: [$class: 'GitWeb', url: gitUrl]])
-                }
+                checkout scm
             }
         }
         stage('Build') {
