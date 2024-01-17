@@ -4,12 +4,9 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                script {
-                    // Explicitly checkout the 'master' branch
-                    checkout([$class: 'GitSCM', 
-                              branches: [[name: 'master']], 
-                              userRemoteConfigs: [[url: 'https://github.com/cmudavath/Java-project.git']]])
-                }
+                checkout([$class: 'GitSCM', 
+                          branches: [[name: 'master']], 
+                          userRemoteConfigs: [[url: 'https://github.com/cmudavath/Java-project.git']]])
             }
         }
         stage('Build') {
