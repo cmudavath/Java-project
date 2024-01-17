@@ -4,11 +4,16 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                // Checkout the source code from the Git repository
-                checkout([$class: 'GitSCM', 
-                          branches: [[name: '*/master']], 
-                          userRemoteConfigs: [[url: 'https://github.com/cmudavath/Java-project.git']],
-                          extensions: [[$class: 'CleanBeforeCheckout']])
+                script {
+                    def gitUrl = 'https://github.com/cmudavath/Java-project.git'
+                    checkout([$class: 'GitSCM', 
+                              branches: [[name: '*/master']], 
+                              userRemoteConfigs: [[url: gitUrl]],
+                              extensions: [[$class: 'CleanBeforeCheckout']],
+                              doGenerateSubmoduleConfigurations: false,
+                              submoduleCfg: [],
+                              browser: [$class: 'GitWeb', url: gitUrl]])
+                }
             }
         }
         stage('Build') {
